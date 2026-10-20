@@ -1,0 +1,24 @@
+31. Find all salespeople whose name starts with ‘P’ and the fourth character is ‘l’. 
+select salespeople.sname from salespeople where sname like 'P__l%';
+
+
+32. Write a query that uses a subquery to obtain all orders for the customer named Cisneros. 
+Assume you do not know his customer number
+
+select * from orders where orders.cnum = (select customers.cnum from customers where customers.cname = 'Cisneros');
+
+
+33. Find the largest orders for Serres and Rifkin.
+select salespeople.sname, MAX(orders.amt) from salespeople left join orders on salespeople.snum = orders.snum where salespeople.sname in('Serres','Rifkin')
+    -> group by salespeople.sname;
+
+
+34. Extract the Salespeople table in the following order : SNUM, SNAME, COMMISSION, CITY. 
+
+select SNUM, SNAME, salespeople.comm as COMMISSION, CITY from salespeople;
+
+
+35. Select all customers whose names fall in between ‘A’ and ‘G’ alphabetical range.
+
+ select * from customers where cname between 'A' and 'H';
+     
