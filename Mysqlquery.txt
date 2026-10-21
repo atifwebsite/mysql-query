@@ -21,4 +21,53 @@ select SNUM, SNAME, salespeople.comm as COMMISSION, CITY from salespeople;
 35. Select all customers whose names fall in between ‘A’ and ‘G’ alphabetical range...
 
  select * from customers where cname between 'A' and 'H';
+
+36.
+Select all the possible combinations of customers that you can assign. 
+
+select c1.cname as c1
+c2.cname as c2
+from customers c1 join customers c2 on c1.cnum < c2.cnum; 
+
+37. Select all orders that are greater than the average for October 4.
+
+select * from orders where amt > (select AVG(amt) from orders where odate ='1996-10-04')
+
+38. Write a select command using a corelated subquery that selects the names and numbers of all 
+customers with ratings equal to the maximum for their city.
+
+select cname,cnum from customers as c1 
+where rating = (select MAX(rating) from customers as c2 where c1.city = c2.city);
+
+39. Write a query that totals the orders for each day and places the results in descending order. 
+select odate,SUM(amt) as total_orders
+from orders
+group by odate
+order by total_orders DESC;
+
+40. Write a select command that produces the rating followed by the name of each customer in 
+San Jose
+
+select customers.cname,customers.rating
+ from customers
+left join salespeople
+on customers.snum = salespeople.snum;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      
