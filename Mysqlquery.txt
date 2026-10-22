@@ -53,10 +53,32 @@ select customers.cname,customers.rating
 left join salespeople
 on customers.snum = salespeople.snum;
 
+41. Find all orders with amounts smaller than any amount for a customer in San Jose.
+select * from orders  where amt < any (select o.amt from orders as o left join customers as c
+on o.cnum = c.cnum
+ where city = 'San Jose');
 
+42. Find all orders with above average amounts for their customers. 
+select * from orders  where amt > any (select avg(o.amt) from orders as o left join customers as c
+on o.cnum = c.cnum);
 
+43. Write a query that selects the highest rating in each city. 
 
+select max(rating) ,city from customers group by city;
 
+44. Write a query that calculates the amount of the salesperson’s commission on each order by a 
+customer with a rating above 100.00. 
+
+select o.onum,o.amt,c.cname,s.sname,
+(o.amt * s.comm) as Commision
+from orders as o 
+left join customers as c on o.cnum=c.cnum
+left join salespeople as s on o.snum = s.snum
+where c.rating > 100;
+
+45. Count the customers with ratings above San Jose’s average. 
+
+select count(*) as Total_customer from customers where rating > (select avg(rating) from customers where city = 'San Jose');
 
 
 
