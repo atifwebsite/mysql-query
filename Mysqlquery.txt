@@ -81,6 +81,52 @@ where c.rating > 100;
 select count(*) as Total_customer from customers where rating > (select avg(rating) from customers where city = 'San Jose');
 
 
+46. Write a query that  produces all pairs of salespeople with themselves as well as duplicate rows 
+with the order reversed.
+
+select s1.sname as salesperson1,
+s2.sname as salesperson2
+ from salespeople as s1
+cross join salespeople as s2;
+
+47. Find all salespeople that are located in either Barcelona or London. 
+
+select * from salespeople where city in('Barcelona', 'London');
+
+48. Find all salespeople with only one customer. 
+select s.snum,c.cnum from salespeople as s left join customers as c on c.snum = s.snum group by s.snum,c.cnum having count(c.cnum=1);
+
+49. Write a query that joins the Customer table to itself to find all pairs of customers served by a 
+single salesperson.
+
+select c1.cname as customers1,
+c2.cname as customers2,
+c1.snum
+from customers as c1
+inner join customers as c2
+on c1.snum= c2.snum
+where c1.cnum<c2.cnum;
+
+
+50. Write a query that will give you all orders for more than $1000.00 
+
+select * from orders where amt > 1000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
